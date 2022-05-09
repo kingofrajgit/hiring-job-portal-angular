@@ -1,0 +1,15 @@
+#displaybody{
+    width: 500px;
+    position: absolute;
+    top:100px;
+    left: 260px;
+   
+}
+.display{
+    padding-left: 20px;
+    padding-top: 50px;
+    font-size: 15px;
+    width: 250px;
+    background-color: aqua;
+    height: 750px;
+}

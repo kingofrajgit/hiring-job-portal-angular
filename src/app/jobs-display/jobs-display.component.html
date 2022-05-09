@@ -1,0 +1,51 @@
+<div class="display" id="filter">
+  <h1 class="card-title">filter</h1>
+  <form>
+    <table><tr>
+    <td>branch :</td><td><select name="branch" id="branch" [(ngModel)]="branch">
+      <option value="null" activate>---select---</option>
+      <option value="IT">IT</option>
+      <option value="none-IT">none-IT</option>
+    </select></td></tr>
+    <tr>
+    <td> above salary :</td><td><select name="salary" id="branch">
+      <option value="null">---select---</option>
+      <option value="IT">2 lac</option>
+      <option value="none-IT">3 lac</option>
+      <option value="none-IT">4 lac</option>
+      <option value="none-IT">5 lac</option>
+      <option value="none-IT">6 lac</option>
+    </select> 
+  </td>
+  </tr>
+    <tr>
+    <select name="branch" id="branch">
+      <option value="null">---select---</option>
+      <option value="IT">IT</option>
+      <option value="none-IT">none-IT</option>
+    </select> </tr>
+  </table>
+    <!-- <input type="text" name="" id="roll">
+    <input type="text" name="" id="Company">
+    <input type="text" name="" id="location">
+    <input type="text"name="" id="skills"> -->
+    <button class="btn btn-danger" type="button">submit</button>
+  </form>
+  {{branch}}
+</div>
+<div  id="displaybody" *ngFor="let job of jobsList">
+  <div class=" text-center" >
+    <div class="card-header">
+      <h2><b>Roll : </b>{{job.roll}}</h2>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title"><b>Company : </b>{{job.companyName}}</h4>
+      <p class="card-text"><b>skill : </b>{{job.skills}} </p>
+      <p class="card-text"><b>salary : </b>{{job.salary}} </p>
+      <a class="btn btn-primary" (click)="apply(job.jobId)">apply now</a>
+    </div>
+    <div class="card-footer text">
+      <b> location :</b> {{job.location}}
+    </div>
+  </div><br>
+</div>
