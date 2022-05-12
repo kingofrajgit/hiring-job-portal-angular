@@ -8,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class UserprofileComponent implements OnInit {
 
   constructor() { }
-
+  userDetails!:any
+  data!:any
   ngOnInit(): void {
+    this.data = localStorage.getItem("token");
+     this.userDetails = JSON.parse(this.data);
+    
   }
 
 }

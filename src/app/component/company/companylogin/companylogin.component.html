@@ -1,1 +1,45 @@
-<p>companylogin works!</p>
+<div class="form">
+    <h2>login</h2>
+    <form class="formelemaents" [formGroup]="userForm">
+      <span>Don't share your password</span><br><br>
+      <table>
+        
+          <tr>
+            <td>
+              <label for="text">Mail id</label>
+            </td>
+            <td>
+              <input  type="email" name="companyMailId" id="MailId" formControlName="companyMailId" aria-required="true">
+              <div class="Error" >
+              <small>  {{companyMailIdError}}</small>
+               </div>
+            </td>
+          </tr><br>
+       
+          <tr>
+            <td>
+              <label for="password">Password</label>
+            </td>
+            <td>
+              <input  type="password" name="password" id="password" formControlName="password" minlength="4" maxlength="20" required >
+              <div class="Error" >
+               <small>{{passwordError}}</small> 
+               </div>
+            </td>
+          </tr>
+        
+      </table>
+    </form><br>
+    <footer>
+      <div id="footerText"><span ><a routerLink="">create account</a></span>
+        <span id="footerbtn">
+          <button (click)="putUser()" class="btn btn-primary">submit</button>
+        </span>
+      </div>
+    </footer>
+  </div>
+  <div class="text-center" id="spinner" *ngIf="spinner == 'spinner'">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>

@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { EmailValidator, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginserviceService } from 'src/app/services/loginservice/loginservice.service';
+import { LoginserviceService } from 'src/app/services/userloginservice/loginservice.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { LoginserviceService } from 'src/app/services/loginservice/loginservice.
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private sc:LoginserviceService,private rt:Router) { }
+  constructor(private fb: FormBuilder, private sc: LoginserviceService, private rt: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   userPassError!: string
   emailValidate!: any
   error!: any
-  val!:any
-  spinner!:string
+  val!: any
+  spinner!: string
 
   /**
    * 
@@ -53,34 +53,38 @@ export class LoginComponent implements OnInit {
     //get the values from user forms(form group) 
     var mailId = this.userForm.get('userMail')?.value
     var password = this.userForm.get('userPass')?.value
-    console.log(mailId,password)
+    console.log(mailId, password)
     //validate
     let val = this.validation(mailId, password)
     let local = this
-    if(val == 0){
+    if (val == 0) {
       //send the data in service
       let val = this.sc.login(mailId, password)
-      val.subscribe(res=>{
+      val.subscribe(res => {
         local.val = res
         // let mail = JSON.parse(this.val) 
-        console.log("raj",this.val)
-        if( local.val.userMailId != null ){
+        console.log("raj", local.val)
+        local.spinner = "null"
+        if (local.val.userMailId != null) {
+          localStorage.setItem("token", JSON.stringify(local.val))
+          local.spinner = "null"
           this.rt.navigate(["/userprofile"])
-         }else{
-           console.log(local.val)
-         }
-       }, err=>{
-         let error=err.error
-         console.log("gopi",error.userMailId)
-        if( error.userMailId != null ){
-         this.rt.navigate(["/userprofile"])
-        }else{
-          local.val=error
+        } else {
+          alert("invalid login Credentialdential");
+
+        }
+      }, err => {
+        let error = err.error
+        console.log("gopi", error.userMailId)
+        if (error.userMailId != null) {
+          this.rt.navigate(["/userprofile"])
+        } else {
+          local.val = error
           console.log(local.val)
         }
       });
     }
-    else{
+    else {
       console.log(val)
     }
     console.log(this.val)
@@ -93,7 +97,7 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.userForm.get('userPass')
   }
-  
+
 
   /**
    * this method used for validation purpose
@@ -111,13 +115,12 @@ export class LoginComponent implements OnInit {
       this.userMailError = "enter a valid email"
       val = 1
     }
-    else if (password == null || password.trim() == ""){
+    else if (password == null || password.trim() == "") {
       this.userPassError = "enter a password"
       val = 1
-    }else if(password == "INVALID"){
+    }else if (password.length<9 && password.length>16){
       this.userPassError = "enter a valid password"
-      val = 1
-    }else{
+    } else {
       val = 0
     }
     return val

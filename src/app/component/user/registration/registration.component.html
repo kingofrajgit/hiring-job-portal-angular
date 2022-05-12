@@ -1,0 +1,77 @@
+<div class="reg-form">
+    <div>
+        <h2 style="text-decoration: underline;">Details Required</h2>
+
+    </div><br>
+    <form name="registration" [formGroup]="userForm" action="">
+        <div>
+            <span><label for="first-name">first name &nbsp; &nbsp; &nbsp; &nbsp;: </label></span>
+            <span id="inputs"><input type="name" name="first-name" id="firstName" placeholder="Name" formControlName="firstName" required></span>
+            <p class="error" id="firstNameError"></p>
+        </div><br>
+        <div>
+            <span><label for="last-name">last-name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label></span>
+            <span id="inputs"><input type="name" name="last-name" id="lastName" formControlName="lastName" required></span>
+            <p class="error" id="lastNameError"></p>
+        </div><br><br>
+        <div>
+            <span><label for="date">Date of birdth :</label></span>
+            <span id="inputs"><input type="date" name="dateOfBirth" id="dob" formControlName="dateOfBirth" required></span>
+            <p class="error" id="dobError"></p>
+        </div><br><br>
+        <div>
+            <div id="gender">
+                <div>Gender :</div>
+                <span><label for="">male :</label></span>
+                <span><input type="radio" name="gender" value="male" formControlName="gender" required=""></span>
+                <span><label for=""> &nbsp;&nbsp; female :</label></span>
+                <span><input type="radio" name="gender" value="female" required="collegeName"></span>
+                <span><label for=""> &nbsp;&nbsp;others :</label></span>
+                <span><input type="radio" name="gender" value="others" required=""></span>
+                <p class="error" id="genderError"></p>
+            </div><br><br>
+            <div>
+                <span><label for="scrol">Degree
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label></span>
+                <span id="inputs"><select name="branch" id="branch" formControlName="branch">
+                        <option value="null">---select---</option>
+                        <option value="Bachelor of Arts">Bachelor of Arts</option>
+                        <option value="Bachelor of Science">Bachelor of Science</option>
+                        <option value="Bachelor of Commerce">Bachelor of Commerce</option>
+                        <option value="Bachelor of Engg./Tech">Bachelor of Engg./Tech</option>
+                    </select></span>
+                <p class="error" id="branchError"></p>
+            </div><br><br>
+            <div>
+                <span><label for="last-name">course&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        :</label></span>
+                <span id="inputs">
+                    <select name="course" id="course"  required formControlName="course">
+                        <option value="null">---select---</option>
+                        <option *ngFor="let name of course" value ={{name.cource}}>{{name.cource}}</option>
+                    </select>
+                </span>
+                <p class="error" id="courceError"></p>
+            </div><br><br>
+            <div>
+                <span><label for="last-name"> college
+                        Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></span>
+                <!--<span id="inputs"><input type="text" name="college-name" id="college-name" required=""></span> -->
+                <select name="collegeName" id="colId" formControlName="collegeName">
+                    <option value="null">---select---</option>
+                    <option *ngFor="let name of colleges" value = {{name.college}}>{{name.college}}</option>
+                </select>
+
+                <p class="error" id="collegeNameError"></p>
+            </div><br><br>
+            <div>
+                <span><label for="phone">phone number:</label></span>
+                <span id="inputs"><input type="phone" name="phone_number" id="phoneNumber" formControlName="phoneNumber" required=""></span>
+                <p class="error" id="phoneNumberError"></p>
+            </div><br><br>
+            <div>
+                <button type="submit" (click)="submitApplication()" class="btn btn-primary">sign in</button>
+            </div>
+        </div>
+    </form>
+</div>

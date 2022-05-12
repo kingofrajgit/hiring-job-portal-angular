@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DisplayServiceService } from '../services/listAllAvailableJobsService/display-service.service';
+import { JobapplyService } from '../../../services/jobapplyservice/jobapply.service';
+import { DisplayServiceService } from '../../../services/listAllAvailableJobsService/display-service.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { DisplayServiceService } from '../services/listAllAvailableJobsService/d
 })
 export class JobsDisplayComponent implements OnInit {
   branch!: any
-  constructor(private ds: DisplayServiceService ,private rt:Router){ }
+  constructor(private ds: DisplayServiceService ,private rt:Router,private jobApply:JobapplyService){ }
   jobsList!: any
   loggedIn!: any
   ngOnInit(): void {
@@ -19,13 +20,22 @@ export class JobsDisplayComponent implements OnInit {
     this.jobsList = JSON.parse(this.jobsList)
     if(this.jobsList == undefined){
       this.ds.getlist()
+      this.ngOnInit
     }
     
   }
   apply(val :any){
-    this.loggedIn = localStorage.getItem("loggedIn")
+    this.loggedIn = localStorage.getItem("token")
     if(this.loggedIn == null){
         this.rt.navigate(["/login"]);
+    }else{
+      let ans = this.jobApply.applyjob(val)
+      ans.subscribe(res=>{
+        console.log(res)
+      }, err=>{
+        let error=err.error
+        console.log(error)
+      });
     }
   }
 

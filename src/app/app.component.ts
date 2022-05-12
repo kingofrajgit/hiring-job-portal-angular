@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { DisplayServiceService } from './services/listAllAvailableJobsService/display-service.service';
 
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   login="home"
   //spinner!: Observable<string>
   spinner!:string
-    constructor(private fb: FormBuilder, private ds: DisplayServiceService, private hcm: HttpClientModule) {
+    constructor(private fb: FormBuilder, private ds: DisplayServiceService, private hcm: HttpClientModule,private toastr: ToastrService) {
 
   }
   ngOnInit(): void {
@@ -28,12 +29,13 @@ export class AppComponent implements OnInit {
     }
   }
   
-
+item = "none"
   pathFunction(item:string){
     this.login = item
+    this.toastr.info("hello bro");
   }
   click() {
-    this.path = "display";
+    this.path = "display";1
   }
 
   condent!: String;

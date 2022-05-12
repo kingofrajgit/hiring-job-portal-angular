@@ -1,1 +1,29 @@
-<p>addapplication works!</p>
+<body>
+    <h1>Post your job application</h1>
+    <div>
+        <form  [formGroup]="application">
+            <label for="number">Job id</label>
+            <input name="jobId" type="number" formControlName="jobId" required><br><br>
+            <label for="text">Company name</label>
+            <input  name="companyName" type="text"formControlName="companyName"  required> <br><br>
+            <label for="text">Roll</label>
+            <input  name="roll"type="text"formControlName="roll" required><br><br>
+            <label for="dropdown">branch</label>
+            <select name="branch" id="branch" formControlName="branch" required>
+                <option value="IT">IT</option>
+                <option value="none-IT">NONE-IT</option>
+            </select><br>
+            <label for="location">location</label>
+            <input  name="location" type="text" formControlName="location" required><br><br> 
+            <label for="skills">skills</label>
+            <input  name="skills" type="text" formControlName="skills" required><br><br>
+            <label for="salary">salary</label>
+            <input  name="salary" type="number" formControlName="salary" required><br><br>
+            <label for="lastDate">last entry date</label>
+            <input  name="lastDate" type="date" formControlName="lastDate" required><br><br>
+            <label for="vacancy">vacancy</label>
+            <input  name="vacancy" type="text" formControlName="vacancy" required><br><br>
+        </form>
+       <button class="btn btn-primary" (click)="submitApplication()">submit</button>
+    </div>
+</body>
